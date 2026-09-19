@@ -1,6 +1,6 @@
 import { APPLY_URL, DOSSIER_URL } from "../data/content";
 
-const KEY = import.meta.env.VITE_POSTHOG_KEY;
+const KEY = import.meta.env.VITE_POSTHOG_PROJECT;
 const HOST = import.meta.env.VITE_POSTHOG_HOST || "https://eu.i.posthog.com";
 const CONSENT_KEY = "acn-cookie-consent";
 
