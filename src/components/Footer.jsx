@@ -1,5 +1,6 @@
 import Container from "./ui/Container";
-import { nav, footer } from "../data/content";
+import { nav, footer, cookieBanner } from "../data/content";
+import { OPEN_COOKIE_SETTINGS, analyticsEnabled } from "../lib/analytics";
 import logo from "../assets/logo-full.png";
 
 export default function Footer() {
@@ -45,6 +46,15 @@ export default function Footer() {
 
           <div className="mt-6 flex flex-col items-center justify-between gap-3 text-xs text-muted-light sm:flex-row">
             <p>{footer.copyright}</p>
+            {analyticsEnabled && (
+              <button
+                type="button"
+                onClick={() => window.dispatchEvent(new Event(OPEN_COOKIE_SETTINGS))}
+                className="underline underline-offset-4 transition-colors hover:text-[var(--color-ink)]"
+              >
+                {cookieBanner.settings}
+              </button>
+            )}
           </div>
         </div>
       </Container>

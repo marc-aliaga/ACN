@@ -4,6 +4,7 @@ import { Bath, BedDouble, Ruler, X } from "lucide-react";
 import HoverButton from "./HoverButton";
 import LocationMap from "./LocationMap";
 import { APPLY_URL, properties } from "../../data/content";
+import { track } from "../../lib/analytics";
 
 const TABS = [
   { id: "resumen", label: "Resumen" },
@@ -18,6 +19,7 @@ export default function PropertyModal({ property, onClose }) {
     if (!property) return;
     setTab("resumen");
     setActiveImage(property.image);
+    track("property_view", { property_id: property.id, city: property.city });
     document.body.style.overflow = "hidden";
     const onKey = (e) => e.key === "Escape" && onClose();
     window.addEventListener("keydown", onKey);

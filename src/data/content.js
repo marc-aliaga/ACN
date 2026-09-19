@@ -103,7 +103,6 @@ const CARTERA_ACTUAL = [
 
 export const properties = {
   kicker: "Propiedades",
-  subtitle: "Busca por ciudad y descubre el rendimiento real de cada operación de Rent to Rent.",
   cities: ["Barcelona", "Málaga", "Murcia"],
   metrics: [
     {
@@ -355,7 +354,17 @@ export const contactSection = {
     "Otra consulta",
   ],
   submitLabel: "Enviar por WhatsApp",
+  // [PENDIENTE] enlazar a la política de privacidad real cuando exista.
+  privacyNote: "Al enviar, guardamos tus datos únicamente para responderte sobre tu consulta.",
   successMessage: "¡Te hemos abierto WhatsApp con tu mensaje listo para enviar! Si no se abrió, escríbenos directamente por email.",
+};
+
+export const cookieBanner = {
+  title: "Cookies y analítica",
+  text: "Usamos cookies de analítica para entender cómo se usa la web y mejorarla. No se activan hasta que las aceptes.",
+  accept: "Aceptar",
+  reject: "Rechazar",
+  settings: "Configurar cookies",
 };
 
 export const footer = {

@@ -3,6 +3,8 @@ import { motion } from "framer-motion";
 import { CheckCircle2 } from "lucide-react";
 import Container from "./ui/Container";
 import { contactSection } from "../data/content";
+import { saveLead } from "../lib/supabase";
+import { track } from "../lib/analytics";
 
 const BUBBLES = Array.from({ length: 14 }, (_, i) => ({
   id: i,
@@ -47,6 +49,9 @@ export default function ContactCTA() {
       lines.join("\n")
     )}`;
     window.open(whatsappUrl, "_blank", "noopener,noreferrer");
+
+    saveLead(form).catch((err) => console.error("No se pudo guardar el lead:", err));
+    track("lead_submitted", { interests: form.interests });
 
     setSubmitted(true);
   };
@@ -189,6 +194,7 @@ export default function ContactCTA() {
                   <button type="submit" className="btn-primary w-full">
                     {contactSection.submitLabel}
                   </button>
+                  <p className="text-center text-[11px] leading-relaxed text-muted-dark">{contactSection.privacyNote}</p>
                 </form>
               </>
             )}

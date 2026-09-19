@@ -11,6 +11,7 @@ node_modules
 dist
 dist-ssr
 *.local
+.env
 
 # Documentos internos con datos personales/financieros reales (DNI, IBAN, contratos)
 # — nunca deben acabar en un repo ni en el sitio publicado.

@@ -17,10 +17,10 @@ const propertyIcon = new L.Icon({
   popupAnchor: [0, -30],
 });
 
-// Vista centrada en España: hoy toda la cartera está en Barcelona, pero el
-// zoom deja sitio a que aparezcan marcadores en otras ciudades más adelante.
-const SPAIN_CENTER = [40.1, -3.7];
-const SPAIN_ZOOM = 6;
+// Vista inicial enfocada en Barcelona (donde está hoy toda la cartera) con el
+// zoom justo para ver los logos por separado; el usuario puede alejarse para ver más.
+const INITIAL_CENTER = [41.3867, 2.1658];
+const INITIAL_ZOOM = 13;
 
 export default function PropertiesMap() {
   const [selected, setSelected] = useState(null);
@@ -45,8 +45,8 @@ export default function PropertiesMap() {
 
         <div className="acn-map mt-10 overflow-hidden rounded-2xl border border-black/[0.08] shadow-lg">
           <MapContainer
-            center={SPAIN_CENTER}
-            zoom={SPAIN_ZOOM}
+            center={INITIAL_CENTER}
+            zoom={INITIAL_ZOOM}
             minZoom={5}
             scrollWheelZoom={false}
             style={{ height: "480px", width: "100%" }}
