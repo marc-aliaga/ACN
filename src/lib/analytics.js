@@ -67,6 +67,7 @@ function trackLinkClicks(e) {
   if (href === APPLY_URL) track("cta_agendar_click");
   else if (href === DOSSIER_URL) track("dossier_download");
   else if (href.startsWith("mailto:")) track("email_click");
+  else if (href.startsWith("https://wa.me/")) track("whatsapp_click");
 }
 
 export function initAnalytics() {

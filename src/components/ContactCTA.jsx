@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { CheckCircle2 } from "lucide-react";
 import Container from "./ui/Container";
 import { contactSection } from "../data/content";
-import { saveLead } from "../lib/supabase";
+import { prefetchLeads, saveLead } from "../lib/supabase";
 import { track } from "../lib/analytics";
 
 const BUBBLES = Array.from({ length: 14 }, (_, i) => ({
@@ -57,7 +57,7 @@ export default function ContactCTA() {
   };
 
   return (
-    <section id="contacto" className="surface-dark relative overflow-hidden py-24 md:py-32">
+    <section id="contacto" className="defer-render [--defer-h:900px] surface-dark relative overflow-hidden py-24 md:py-32">
       <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
         {bubbles.map((b) => (
           <span
@@ -117,7 +117,7 @@ export default function ContactCTA() {
                   {contactSection.formTitle}
                 </h3>
 
-                <form onSubmit={handleSubmit} className="mt-6 space-y-5">
+                <form onSubmit={handleSubmit} onFocus={prefetchLeads} className="mt-6 space-y-5">
                   <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                     <div>
                       <label htmlFor="name" className="mb-2 block text-xs font-medium uppercase tracking-wide text-muted-dark">

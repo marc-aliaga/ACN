@@ -54,6 +54,49 @@ inversión respectivamente.
    vs. coste de arrendamiento por año) que se dibuja al entrar en el
    viewport, con 3 métricas en paralelo debajo.
 
+## Página de campaña (`/invierte`)
+
+Landing a la que apuntan los anuncios; su objetivo único es que el visitante
+descargue el dossier. Se abre en `/invierte` (sin router: `App.jsx` mira la
+ruta; en Vercel la reescritura está en `vercel.json`).
+
+- Todo el copy y las cifras viven en `src/data/campaign.js` (las cifras salen
+  del dossier y de `content.js`: si cambian allí, cambiarlas también aquí).
+- Secciones en `src/components/campaign/` (una por archivo) y la página en
+  `src/pages/CampaignPage.jsx`.
+- El formulario (`DossierForm.jsx`) guarda el lead en la tabla `leads` de
+  Supabase (con los `utm_*` de la URL, así se sabe qué anuncio lo trajo), abre
+  el PDF y lanza el evento `dossier_lead_submitted` de PostHog. Si el guardado
+  falla, el dossier se abre igualmente.
+- Enlaces para los anuncios: `https://TU-DOMINIO/invierte?utm_source=meta&utm_medium=paid&utm_campaign=invierte-sin-comprar`
+- Pendiente: enlazar la política de privacidad en el texto de consentimiento
+  del formulario (`dossierForm.consent`) y sustituir la portada dibujada en CSS
+  (`DossierContents.jsx`) por una imagen real de la primera página del PDF.
+
+## Rendimiento
+
+Auditado con Lighthouse (móvil con red 4G lenta y CPU 4x más lenta, y escritorio).
+Antes → después: home móvil 48 → 93, campaña móvil 61 → 94, ambas en escritorio → 100.
+
+Cómo se ha conseguido (y qué mantener al añadir cosas):
+
+- **JS por página.** `App.jsx` carga `HomePage` y `CampaignPage` con `lazy`; cada una es su
+  propio bloque. El mapa (Leaflet) solo se descarga al acercarse (`LazyOnView`) y
+  Supabase solo al enfocar/enviar un formulario (`lib/supabase.js`). No añadas librerías
+  pesadas al bloque de entrada: cárgalas con `import()` bajo demanda.
+- **Precarga por ruta.** El plugin `routePreload` de `vite.config.js` inyecta en el HTML un
+  script que precarga, según la ruta, el bloque de JS de esa página y sus fuentes.
+- **Fuentes propias.** Inter, Inter Tight y Fraunces (variables, subconjunto latino) están en
+  `public/fonts/` con su `@font-face` en `src/index.css`. Sin Google Fonts.
+- **Imágenes.** Todo en WebP y a su tamaño real de uso (2x): las fotos de `public/properties`
+  a 1280 px, los fondos con versión móvil (`bg-mobile.webp`, `photo-2-640.webp`) y
+  `loading="lazy"` en lo que queda bajo el primer pantallazo. Antes de añadir una foto,
+  conviértela a WebP y redúcela (un hero ≤ 1600 px, una tarjeta ≤ 900 px).
+- **Renderizado.** Las secciones muy por debajo llevan `defer-render` (`content-visibility`);
+  no la uses en secciones que tengan modales `fixed` dentro. La tarjeta 3D se pausa fuera
+  de pantalla y en móvil omite los filtros SVG.
+- **Caché.** `vercel.json` marca `/assets` y `/fonts` como inmutables y `/properties` a 30 días.
+
 ## Build de producción
 
 ```bash

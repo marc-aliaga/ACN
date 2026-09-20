@@ -17,26 +17,27 @@
 //    NO se ha usado ningun dato personal de ese contrato (nombres, DNI,
 //    IBAN, telefono): esos datos no deben publicarse nunca en la web.
 //
-// "heroMetrics" son los rangos orientativos reales del dossier (no un
-// historico auditado). "properties.metrics" reflejan el estado ACTUAL de la
-// cartera: las 3 operaciones reales de properties.properties (Ermita 17,
-// Berenguer 25, Maquinista 25), con su ingreso bruto y coste anualizados. No
-// es un historico de varios anios (solo hay 3 operaciones hasta la fecha) —
-// ampliar cuando existan mas operaciones o un historico mensual/anual real.
+// "heroMetrics" son los rangos orientativos reales del dossier (no un historico
+// auditado).
 //
-// "properties.properties" tiene 3 casos reales (tag "Caso real"). Las
-// DIRECCIONES MOSTRADAS SON ALTERNATIVAS (calle cercana u otro barrio) por
-// confidencialidad con los propietarios; las reales estan en src/info/ y no
-// deben aparecer en la web (ni en ids, rutas de fotos o textos). Equivalencia
-// interna: caso-1 = Ermita 17 (Hospitalet), caso-2 = Berenguer 25 y
-// caso-3 = Maquinista 25 (ambas Barceloneta). El caso-1 usa fotos reales del
-// inmueble (servidas desde /public/properties/caso-1/ — habitaciones, cocina,
-// baño, lavadero y vistas); solo hay foto de 2 de las 4 habitaciones, añadir el
-// resto cuando se tengan. caso-2 y caso-3 siguen con stock de Unsplash —
-// sustituir por fotos reales de cada inmueble cuando se tengan.
+// "properties.properties" tiene 3 casos reales (tag "Caso real"). Equivalencia
+// interna: caso-1 = Ermita 17 (Hospitalet), caso-2 = Berenguer 25 y caso-3 =
+// Maquinista 25 (ambas Barceloneta).
+//  - caso-1 (destacado): se muestra con su calle real, "Carrer de l'Ermita", SIN el
+//    numero de portal, y con el municipio que consta en la ficha (L'Hospitalet). El
+//    barrio no consta en los datos: no inventarlo. Sus lat/lng son aproximadas
+//    (municipio), no la posicion exacta del inmueble. Usa fotos reales del inmueble
+//    (servidas desde /public/properties/caso-1/ — habitaciones, cocina, baño, lavadero
+//    y vistas); solo hay foto de 2 de las 4 habitaciones, añadir el resto cuando se tengan.
+//  - caso-2 y caso-3: direcciones ALTERNATIVAS (calle cercana u otro barrio), tambien
+//    sin numero, por confidencialidad con los propietarios; las reales estan en
+//    src/info/ y no deben aparecer en la web. Siguen con stock de Unsplash —
+//    sustituir por fotos reales de cada inmueble cuando se tengan.
+// No añadir aqui propiedades que no sean operaciones reales de la empresa: la web se
+// dirige a inversores y cada ficha lleva capital y rentabilidad.
 // ---------------------------------------------------------------------------
 
-export const APPLY_URL = "#agendar"; // [PENDIENTE] enlace a Calendly / TypeForm de los fundadores
+export const APPLY_URL = "#agendar"; // [PENDIENTE] enlace a Calendly / TypeForm del equipo
 export const DOSSIER_URL = "/dossier-alquila-con-nosotros.pdf"; // dossier real (src/info/), servido desde /public
 
 export const nav = {
@@ -46,7 +47,7 @@ export const nav = {
     { label: "Como invertimos", href: "#como-invertimos" },
     { label: "Contacto", href: "#contacto" },
   ],
-  cta: { label: "Agendar reunión", href: APPLY_URL },
+  cta: { label: "Agendar reunión con el equipo", labelShort: "Agendar reunión", href: APPLY_URL },
 };
 
 export const hero = {
@@ -85,72 +86,61 @@ export const heroMetrics = [
 ];
 
 export const heroActions = {
-  primary: { label: "Agendar reunión con los fundadores", href: APPLY_URL },
+  primary: { label: "Agendar reunión con el equipo", href: APPLY_URL },
   secondary: { label: "Descargar dossier de inversión", href: DOSSIER_URL },
 };
 
-// Track record ACTUAL, no proyección: las 3 operaciones reales de properties
-// (mostradas por barrio, con direcciones aproximadas por confidencialidad), con
-// su ingreso bruto y coste anualizados a partir de las cifras mensuales de cada una:
-//   Collblanc: 2.080 €/mes ingreso habitaciones · 977,55 €/mes renta propietario -> 24,96 k€ / 11,73 k€ al año
-//   Poblenou:  2.080 €/mes ingreso habitaciones · 977,55 €/mes renta propietario -> 24,96 k€ / 11,73 k€ al año
-//   El Born:   2.990 €/mes ingreso habitaciones · 1.442,00 €/mes renta propietario -> 35,88 k€ / 17,30 k€ al año
-const CARTERA_ACTUAL = [
-  { nombre: "Collblanc", ingresoBrutoAnualK: 24.96, costeAnualK: 11.73 },
-  { nombre: "Poblenou", ingresoBrutoAnualK: 24.96, costeAnualK: 11.73 },
-  { nombre: "El Born", ingresoBrutoAnualK: 35.88, costeAnualK: 17.3 },
-];
-
 export const properties = {
   kicker: "Propiedades",
-  cities: ["Barcelona", "Málaga", "Murcia"],
-  metrics: [
-    {
-      value: CARTERA_ACTUAL.length,
-      prefix: "",
-      suffix: "",
-      label: "Propiedades gestionadas actualmente",
-    },
-    {
-      value: Math.round(CARTERA_ACTUAL.reduce((sum, p) => sum + p.ingresoBrutoAnualK, 0) * 1000),
-      prefix: "",
-      suffix: " €/año",
-      label: "Ingreso bruto anual gestionado",
-    },
-    {
-      value: 25,
-      prefix: "",
-      suffix: "% anual",
-      label: "Rendimiento pactado con los inversores en las 3 operaciones",
-    },
-  ],
-  metricsDisclaimer:
-    "Cifras actuales de nuestras 3 operaciones reales de Rent to Rent (Collblanc, Poblenou y El Born), estimadas por nuestro equipo a partir de la renta pactada y la ocupación esperada; no son un histórico auditado por un tercero.",
+  // Mapa: solo las operaciones reales llevan pin: properties.properties (casos destacados)
+  // más mapProperties (data/mapProperties.js, solo visibles en el mapa). Las zonas EN
+  // ESTUDIO (`zones`) no llevan pin, ficha ni rentabilidad: no convertirlas en propiedades
+  // hasta que exista una operación real. Hoy no hay ninguna: Málaga y Murcia ya tienen
+  // operaciones y pasan a `cities` (atajos del mapa). lat/lng = centro de la ciudad.
+  map: {
+    title: "Dónde están nuestras propiedades",
+    intro: "Nuestra cartera está repartida entre Barcelona, Málaga y Murcia.",
+    homeLabel: "Barcelona",
+    allLabel: "Ver todo",
+    realLegend: "Operación real",
+    zoneLegend: "Zona en estudio",
+    zoneBadge: "En estudio",
+    zoneNote: "Zona en estudio. Todavía no tenemos operaciones activas aquí.",
+    footnote:
+      "Ubicaciones aproximadas a nivel de barrio, no la dirección exacta del inmueble.",
+    cities: [
+      { id: "malaga", name: "Málaga", lat: 36.7213, lng: -4.4214 },
+      { id: "murcia", name: "Murcia", lat: 37.9922, lng: -1.1307 },
+    ],
+    // Zonas en estudio (círculo dorado, sin pin). Vacío: ya no hay ninguna.
+    zones: [],
+  },
   // Cifras proyectadas por nuestro propio equipo a partir de cada operación real,
   // no auditadas por un tercero — pueden variar según la ocupación final.
   disclaimer:
-    "Operaciones reales gestionadas por Alquila con nosotros (ACN). Cifras estimadas por nuestro equipo a partir de la renta pactada con el propietario y la ocupación esperada; pueden variar según la ocupación real. Por confidencialidad con los propietarios, las direcciones mostradas son aproximadas (calle cercana o de otro barrio). El primer caso incluye fotos reales del inmueble; los otros dos usan fotos de referencia (stock) pendientes de sustituir por fotos reales.",
+    "Operaciones reales gestionadas por Alquila con nosotros (ACN). Cifras estimadas por nuestro equipo a partir de la renta pactada con el propietario y la ocupación esperada; pueden variar según la ocupación real. Por confidencialidad con los propietarios no mostramos el número de portal, y en los casos 2 y 3 las calles son aproximadas (calle cercana o de otro barrio). El primer caso incluye fotos reales del inmueble; los otros dos usan fotos de referencia (stock) pendientes de sustituir por fotos reales.",
   properties: [
     {
       id: "caso-1",
       tag: "Caso real",
-      address: "Carrer de Collblanc 42",
-      location: "Collblanc, L'Hospitalet de Llobregat",
+      address: "Carrer de l'Ermita",
+      location: "L'Hospitalet de Llobregat",
+      featured: true,
       city: "Barcelona",
       coordinates: "41.3752° N, 2.1175° E",
       lat: 41.3752,
       lng: 2.1175,
-      image: "/properties/caso-1/habitacion-1.jpg",
+      image: "/properties/caso-1/habitacion-1.webp",
       images: [
-        "/properties/caso-1/habitacion-1.jpg",
-        "/properties/caso-1/habitacion-2.jpg",
-        "/properties/caso-1/cocina-1.jpg",
-        "/properties/caso-1/cocina-2.jpg",
-        "/properties/caso-1/cocina-3.jpg",
-        "/properties/caso-1/bano-1.jpg",
-        "/properties/caso-1/bano-2.jpg",
-        "/properties/caso-1/lavadero.jpg",
-        "/properties/caso-1/vistas.jpg",
+        "/properties/caso-1/habitacion-1.webp",
+        "/properties/caso-1/habitacion-2.webp",
+        "/properties/caso-1/cocina-1.webp",
+        "/properties/caso-1/cocina-2.webp",
+        "/properties/caso-1/cocina-3.webp",
+        "/properties/caso-1/bano-1.webp",
+        "/properties/caso-1/bano-2.webp",
+        "/properties/caso-1/lavadero.webp",
+        "/properties/caso-1/vistas.webp",
       ],
       themeColor: "256 70% 30%",
       beds: 4,
@@ -168,7 +158,7 @@ export const properties = {
         "El propietario cobra su renta fija: 977,55 €/mes",
       ],
       market: {
-        title: "El barrio — Collblanc, L'Hospitalet de Llobregat",
+        title: "La zona — L'Hospitalet de Llobregat",
         bullets: [
           "Municipio colindante con Barcelona, muy buena conexión de metro",
           "Fuerte demanda de alquiler por habitaciones (profesionales y estudiantes)",
@@ -187,13 +177,13 @@ export const properties = {
     {
       id: "caso-2",
       tag: "Caso real",
-      address: "Carrer de Pujades 110",
+      address: "Carrer de Pujades",
       location: "Poblenou, Barcelona",
       city: "Barcelona",
       coordinates: "41.3993° N, 2.1965° E",
       lat: 41.3993,
       lng: 2.1965,
-      image: "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=1200&q=80",
+      image: "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=800&q=70",
       themeColor: "230 65% 32%",
       beds: 4,
       baths: 1,
@@ -229,13 +219,13 @@ export const properties = {
     {
       id: "caso-3",
       tag: "Caso real",
-      address: "Carrer del Comerç 30",
+      address: "Carrer del Comerç",
       location: "El Born, Barcelona",
       city: "Barcelona",
       coordinates: "41.3855° N, 2.1834° E",
       lat: 41.3855,
       lng: 2.1834,
-      image: "https://images.unsplash.com/photo-1502005229762-cf1b2da7c5d6?auto=format&fit=crop&w=1200&q=80",
+      image: "https://images.unsplash.com/photo-1502005229762-cf1b2da7c5d6?auto=format&fit=crop&w=800&q=70",
       themeColor: "280 55% 30%",
       beds: 5,
       baths: 2,
@@ -312,6 +302,19 @@ export const howItWorks = {
 export const investorZone = {
   title: "Zona de Inversores",
   subtitle: "Un espacio exclusivo para quienes ya invierten con nosotros — o quieren empezar.",
+  // Tarjeta 3D con forma de invitación VIP (logo grande); al pulsarla se
+  // solicita el acceso por WhatsApp.
+  vip: {
+    tileTitle: "Solicita tu invitación",
+    badge: "Invitación VIP",
+    title: "Zona de inversores",
+    note: "Acceso privado · Comunidad de inversores",
+  },
+  // Tesela del vídeo (el vídeo real está pendiente: ver card.video.url).
+  videoTile: {
+    title: "Conoce la zona de inversores",
+    label: "Ver vídeo",
+  },
   card: {
     intro: "Comparte análisis de mercado y oportunidades de inversión antes de salir al público, y crece junto a otros inversores.",
     checklist: [
@@ -328,7 +331,7 @@ export const investorZone = {
   },
   stats: [
     { value: 25, suffix: "%", label: "Rendimiento anual pactado" },
-    { value: 5000, suffix: " € mínimo", label: "Entrada mínima por operación" },
+    { value: 5000, suffix: " €", label: "Entrada mínima por operación" },
   ],
   cta: {
     label: "Solicitar acceso al grupo",
@@ -382,7 +385,7 @@ export const footer = {
     {
       title: "Recursos",
       links: [
-        { label: "Agendar reunión", href: APPLY_URL },
+        { label: "Agendar reunión con el equipo", href: APPLY_URL },
         { label: "Descargar dossier de inversión", href: DOSSIER_URL },
       ],
     },

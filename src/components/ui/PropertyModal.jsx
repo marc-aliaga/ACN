@@ -155,20 +155,22 @@ export default function PropertyModal({ property, onClose }) {
                             ))}
                           </ul>
                         </div>
-                        <div>
-                          <h4 className="font-[var(--font-display)] text-lg font-semibold">{property.market.title}</h4>
-                          <ul className="mt-3 space-y-2">
-                            {property.market.bullets.map((item) => (
-                              <li key={item} className="flex items-start gap-2.5 leading-relaxed text-muted-light">
-                                <span
-                                  aria-hidden="true"
-                                  className="mt-2 h-1.5 w-1.5 flex-none rounded-full bg-[var(--color-gold)]"
-                                />
-                                {item}
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
+                        {property.market && (
+                          <div>
+                            <h4 className="font-[var(--font-display)] text-lg font-semibold">{property.market.title}</h4>
+                            <ul className="mt-3 space-y-2">
+                              {property.market.bullets.map((item) => (
+                                <li key={item} className="flex items-start gap-2.5 leading-relaxed text-muted-light">
+                                  <span
+                                    aria-hidden="true"
+                                    className="mt-2 h-1.5 w-1.5 flex-none rounded-full bg-[var(--color-gold)]"
+                                  />
+                                  {item}
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                        )}
                         <div>
                           <h4 className="font-[var(--font-display)] text-lg font-semibold">Gestión de la propiedad</h4>
                           <ul className="mt-3 space-y-2">
@@ -210,8 +212,10 @@ export default function PropertyModal({ property, onClose }) {
                     />
                   </div>
 
-                  {properties.disclaimer && (
-                    <p className="mt-6 text-[11px] text-muted-light/70">{properties.disclaimer}</p>
+                  {(property.disclaimer ?? properties.disclaimer) && (
+                    <p className="mt-6 text-[11px] text-muted-light/70">
+                      {property.disclaimer ?? properties.disclaimer}
+                    </p>
                   )}
                 </div>
 

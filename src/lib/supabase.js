@@ -1,11 +1,25 @@
-import { createClient } from "@supabase/supabase-js";
-
 const url = import.meta.env.VITE_SUPABASE_URL;
 const anonKey = import.meta.env.VITE_SUPABASE_PUBLISHABLE;
 
-const client = url && anonKey ? createClient(url, anonKey) : null;
+// supabase-js pesa bastante y solo hace falta al enviar un formulario, así que se
+// descarga bajo demanda (y se puede precargar al enfocar el formulario).
+let clientPromise = null;
+
+function getClient() {
+  if (!url || !anonKey) return Promise.resolve(null);
+  if (!clientPromise) {
+    clientPromise = import("@supabase/supabase-js").then(({ createClient }) => createClient(url, anonKey));
+  }
+  return clientPromise;
+}
+
+/** Empieza a descargar el cliente sin esperar al envío (p. ej. al enfocar un campo). */
+export function prefetchLeads() {
+  getClient();
+}
 
 export async function saveLead({ name, email, message, interests }) {
+  const client = await getClient();
   if (!client) return;
 
   const params = new URLSearchParams(window.location.search);

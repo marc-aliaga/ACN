@@ -18,6 +18,7 @@ export default function CountUp({ value, prefix = "", suffix = "", decimals, cla
         ref.current.textContent = `${prefix}${v.toLocaleString("es-ES", {
           minimumFractionDigits: digits,
           maximumFractionDigits: digits,
+          useGrouping: "always", // "5.000 €", no "5000 €": es-ES no agrupa los números de 4 cifras
         })}${suffix}`;
       }
     });

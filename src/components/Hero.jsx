@@ -2,6 +2,7 @@ import Container from "./ui/Container";
 import HoverButton from "./ui/HoverButton";
 import { hero, heroMetrics, heroActions } from "../data/content";
 import heroBg from "../assets/bg.webp";
+import heroBgMobile from "../assets/bg-mobile.webp";
 
 export default function Hero() {
   const [titleLine1, titleLine2] = hero.title.split("\n");
@@ -10,10 +11,17 @@ export default function Hero() {
   return (
     <section id="top" className="surface-dark relative overflow-hidden pt-32 pb-24 md:pt-40 md:pb-28">
       <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
-        <div
-          className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: `url(${heroBg})` }}
-        />
+        {/* <img> (no CSS): el navegador la descubre antes y sirve la versión ligera en móvil */}
+        <picture>
+          <source media="(min-width: 768px)" srcSet={heroBg} />
+          <img
+            src={heroBgMobile}
+            alt=""
+            fetchPriority="high"
+            decoding="async"
+            className="absolute inset-0 h-full w-full object-cover"
+          />
+        </picture>
         <div
           className="absolute inset-0"
           style={{

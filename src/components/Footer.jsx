@@ -1,11 +1,15 @@
 import Container from "./ui/Container";
 import { nav, footer, cookieBanner } from "../data/content";
 import { OPEN_COOKIE_SETTINGS, analyticsEnabled } from "../lib/analytics";
-import logo from "../assets/logo-full.png";
+import logo from "../assets/logo-full.webp";
 
-export default function Footer() {
+// homePath: cuando el footer se usa fuera de la home (p. ej. en /invierte), los
+// enlaces a secciones ("#propiedades") deben apuntar a la home ("/#propiedades").
+export default function Footer({ homePath = "" }) {
+  const resolve = (href) => (homePath && href.startsWith("#") ? `${homePath}${href}` : href);
+
   return (
-    <footer className="surface-light border-t border-black/[0.08]">
+    <footer className="defer-render [--defer-h:520px] surface-light border-t border-black/[0.08]">
       <Container className="py-16 md:py-20">
         <div className="grid gap-12 sm:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1fr]">
           <div>
@@ -21,7 +25,7 @@ export default function Footer() {
               <ul className="mt-4 space-y-3 text-sm">
                 {column.links.map((link) => (
                   <li key={link.label}>
-                    <a href={link.href} className="text-[var(--color-ink)] transition-colors hover:text-[var(--color-gold-deep)]">
+                    <a href={resolve(link.href)} className="text-[var(--color-ink)] transition-colors hover:text-[var(--color-gold-deep)]">
                       {link.label}
                     </a>
                   </li>

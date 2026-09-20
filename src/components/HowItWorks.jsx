@@ -9,7 +9,7 @@ const STEP_IMAGES = [stepOneImg, stepTwoImg, stepThreeImg];
 
 export default function HowItWorks() {
   return (
-    <section id="como-invertimos" className="surface-dark py-24 md:py-40">
+    <section id="como-invertimos" className="defer-render [--defer-h:2600px] surface-dark py-24 md:py-40">
       <Container>
         <div className="max-w-2xl">
           <h2 className="font-[var(--font-display)] text-3xl md:text-5xl font-semibold tracking-tight">

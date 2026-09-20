@@ -1,7 +1,7 @@
 import Container from "./ui/Container";
 import HoverButton from "./ui/HoverButton";
 import { nav } from "../data/content";
-import logo from "../assets/logo-full.png";
+import logo from "../assets/logo-full.webp";
 
 export default function Nav() {
   return (
@@ -23,7 +23,13 @@ export default function Nav() {
           ))}
         </nav>
 
-        <HoverButton label={nav.cta.label} href={nav.cta.href} size="sm" />
+        {/* Texto completo en escritorio; en móvil no cabe junto al logo, así que va el corto */}
+        <span className="hidden md:block">
+          <HoverButton label={nav.cta.label} href={nav.cta.href} size="sm" />
+        </span>
+        <span className="md:hidden">
+          <HoverButton label={nav.cta.labelShort} href={nav.cta.href} size="sm" />
+        </span>
       </Container>
     </header>
   );
