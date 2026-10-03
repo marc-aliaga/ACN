@@ -47,7 +47,6 @@ export const nav = {
     { label: "Como invertimos", href: "#como-invertimos" },
     { label: "Contacto", href: "#contacto" },
     { label: "Qué hacemos", href: "#que-hacemos" },
-    { label: "Equipo", href: "#equipo" },
     { label: "Únete", href: "#trabaja-con-nosotros" },
   ],
   cta: { label: "Agendar reunión con el equipo", labelShort: "Agendar reunión", href: APPLY_URL },
@@ -297,22 +296,6 @@ export const howItWorks = {
         "Cuanto más inviertes, mejores condiciones y más acceso a oportunidades fuera de mercado",
       ],
     },
-  ],
-};
-
-// [PENDIENTE] nombres, cargos y fotos reales del equipo — de momento son fotos
-// de referencia (Unsplash) y nombres de ejemplo.
-const unsplash = (id) => `https://images.unsplash.com/${id}?auto=format&fit=crop&w=800&h=1000&q=80`;
-
-export const team = {
-  title: "El equipo detrás de cada operación",
-  intro:
-    "Personas que localizan, negocian, reforman y gestionan cada inmueble en Barcelona. Detrás de tu inversión siempre hay alguien con nombre y apellido.",
-  members: [
-    { name: "Nombre Apellido", role: "CEO & Cofundador", image: unsplash("photo-1507003211169-0a1dd7228f2d") },
-    { name: "Nombre Apellido", role: "Operaciones & Cofundadora", image: unsplash("photo-1494790108377-be9c29b29330") },
-    { name: "Nombre Apellido", role: "Relación con inversores", image: unsplash("photo-1500648767791-00dcc994a43e") },
-    { name: "Nombre Apellido", role: "Gestión de inmuebles", image: unsplash("photo-1438761681033-6461ffad8d80") },
   ],
 };
 

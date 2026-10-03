@@ -3,7 +3,6 @@ import Nav from "../components/Nav";
 import Hero from "../components/Hero";
 import Properties from "../components/Properties";
 import HowItWorks from "../components/HowItWorks";
-import Team from "../components/Team";
 import WhatWeDo from "../components/WhatWeDo";
 import Careers from "../components/Careers";
 import InvestorZone from "../components/InvestorZone";
@@ -28,7 +27,6 @@ export default function HomePage() {
       <InvestorZone />
       <ContactCTA />
       <WhatWeDo />
-      <Team />
       <Careers />
       <Footer />
       <CookieBanner />
