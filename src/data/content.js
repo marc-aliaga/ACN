@@ -46,6 +46,9 @@ export const nav = {
     { label: "Propiedades", href: "#propiedades" },
     { label: "Como invertimos", href: "#como-invertimos" },
     { label: "Contacto", href: "#contacto" },
+    { label: "Qué hacemos", href: "#que-hacemos" },
+    { label: "Equipo", href: "#equipo" },
+    { label: "Únete", href: "#trabaja-con-nosotros" },
   ],
   cta: { label: "Agendar reunión con el equipo", labelShort: "Agendar reunión", href: APPLY_URL },
 };
@@ -271,30 +274,109 @@ export const howItWorks = {
       number: "01",
       title: "Entras en una operación concreta",
       bullets: [
-        "Desde 5.000 € en Rent to Rent (gestión por habitaciones)",
-        "Desde 20.000–30.000 € en un Flip (reforma y venta)",
-        "Capital, plazo y rentabilidad ya estructurados antes de presentártelo",
+        "Entrada mínima de 5.000 €, que te devolvemos en cuotas mensuales",
+        "Presentamos cada operación, con su análisis, en nuestra comunidad privada de inversores",
+        "En la comunidad compartimos análisis de mercado, resolvemos dudas y abrimos las nuevas operaciones antes que a nadie",
       ],
     },
     {
       number: "02",
       title: "Firmamos y formalizamos",
       bullets: [
-        "Contrato de préstamo con importe, plazo y rentabilidad pactada",
-        "Liquidación ante Hacienda mediante el Modelo 600 cuando corresponde",
-        "Nos encargamos de reforma, amueblamiento y gestión diaria",
+        "Firmamos contigo un contrato de préstamo legal",
+        "Lo presentamos ambos ante Hacienda con el Modelo 600",
+        "Tú solo aportas el capital: nuestro equipo profesional se encarga de absolutamente toda la operativa",
       ],
     },
     {
       number: "03",
       title: "Recibes tu retorno pactado",
       bullets: [
-        "Interés fijo pactado (por ejemplo, 25%) sobre el capital aportado",
-        "Reinviertes en la siguiente operación",
-        "Sigues construyendo patrimonio sin gestionar tú el día a día",
+        "Interés fijo pactado: normalmente un 24–25% de rentabilidad sobre el total, en 12–24 meses",
+        "Hasta la fecha, ninguna operación ha bajado del 24%",
+        "Cuanto más inviertes, mejores condiciones y más acceso a oportunidades fuera de mercado",
       ],
     },
   ],
+};
+
+// [PENDIENTE] nombres, cargos y fotos reales del equipo — de momento son fotos
+// de referencia (Unsplash) y nombres de ejemplo.
+const unsplash = (id) => `https://images.unsplash.com/${id}?auto=format&fit=crop&w=800&h=1000&q=80`;
+
+export const team = {
+  title: "El equipo detrás de cada operación",
+  intro:
+    "Personas que localizan, negocian, reforman y gestionan cada inmueble en Barcelona. Detrás de tu inversión siempre hay alguien con nombre y apellido.",
+  members: [
+    { name: "Nombre Apellido", role: "CEO & Cofundador", image: unsplash("photo-1507003211169-0a1dd7228f2d") },
+    { name: "Nombre Apellido", role: "Operaciones & Cofundadora", image: unsplash("photo-1494790108377-be9c29b29330") },
+    { name: "Nombre Apellido", role: "Relación con inversores", image: unsplash("photo-1500648767791-00dcc994a43e") },
+    { name: "Nombre Apellido", role: "Gestión de inmuebles", image: unsplash("photo-1438761681033-6461ffad8d80") },
+  ],
+};
+
+// Sección "Qué hacemos" con la foto del CEO.
+// [PENDIENTE] foto real de Isaac Reyes: guardarla como public/team/isaac-reyes.webp
+// (vertical, ~800x1000). Mientras no exista se muestran sus iniciales.
+export const whatWeDo = {
+  kicker: "Qué hacemos",
+  title: "Convertimos viviendas infrautilizadas en operaciones rentables",
+  intro:
+    "Somos un equipo operativo: localizamos el inmueble, negociamos con el propietario, lo preparamos y lo gestionamos día a día. El inversor aporta capital a una operación concreta y nosotros hacemos el resto.",
+  pillars: [
+    { title: "Captamos", text: "Buscamos y analizamos viviendas con potencial en Barcelona, Málaga y Murcia." },
+    { title: "Preparamos", text: "Reforma ligera, amueblamiento y puesta a punto para alquiler por habitaciones." },
+    { title: "Gestionamos", text: "Inquilinos, cobros, incidencias y mantenimiento, sin que el inversor tenga que intervenir." },
+    { title: "Rendimos cuentas", text: "Contrato firmado en cada operación e información clara antes y durante la inversión." },
+  ],
+  ceo: {
+    name: "Isaac Reyes",
+    role: "CEO & Fundador",
+    image: "/team/isaac-reyes.webp",
+    initials: "IR",
+    // [PENDIENTE] revisar este texto con Isaac antes de publicar.
+    note: "Lidera la selección de cada operación y la relación con los inversores.",
+  },
+};
+
+// Formulario "Forma parte del equipo". Los envíos se guardan en la tabla
+// `applications` de Supabase (ver supabase/applications.sql).
+export const careers = {
+  kicker: "Trabaja con nosotros",
+  title: "Forma parte del equipo",
+  intro:
+    "Estamos creciendo en Barcelona, Málaga y Murcia y buscamos personas con ganas de construir patrimonio inmobiliario con nosotros: captación, gestión de inmuebles, reformas o relación con inversores.",
+  perks: [
+    "Aprende el negocio desde dentro, en operaciones reales",
+    "Posibilidad de participar como co-inversor en las operaciones",
+    "Equipo pequeño: tu trabajo se nota desde el primer día",
+  ],
+  formTitle: "Cuéntanos sobre ti",
+  fields: {
+    name: "Nombre y apellidos",
+    email: "Email",
+    phone: "Teléfono",
+    city: "Ciudad",
+    role: "Área que te interesa",
+    experienceYears: "Experiencia en inmobiliario",
+    savings: "¿Cuánto tienes ahorrado para invertir?",
+    experience: "Cuéntanos tu experiencia",
+    linkedin: "LinkedIn (opcional)",
+  },
+  roles: ["Captación de inmuebles", "Gestión de inmuebles", "Reformas", "Relación con inversores", "Marketing y ventas", "Otro"],
+  experienceOptions: ["Sin experiencia", "Menos de 1 año", "1–3 años", "3–5 años", "Más de 5 años"],
+  // Rangos, no cifras exactas: se pregunta para saber quién podría co-invertir.
+  savingsOptions: ["Menos de 5.000 €", "5.000 – 15.000 €", "15.000 – 30.000 €", "30.000 – 60.000 €", "Más de 60.000 €", "Prefiero no decirlo"],
+  savingsHint: "Solo para saber si te interesaría co-invertir en alguna operación. No es un requisito.",
+  experiencePlaceholder: "Trabajos anteriores, operaciones en las que has participado, qué te motiva…",
+  consent: "Acepto que guarden mis datos para valorar mi candidatura y contactarme.",
+  submit: "Enviar candidatura",
+  success: {
+    title: "¡Candidatura recibida!",
+    text: "Gracias por tu interés. Revisamos cada candidatura y te escribiremos si encaja con lo que buscamos.",
+  },
+  error: "No hemos podido enviar tu candidatura. Inténtalo de nuevo o escríbenos por WhatsApp.",
 };
 
 // Las stats de esta sección reutilizan las mismas cifras que heroMetrics (dossier
@@ -312,7 +394,7 @@ export const investorZone = {
   },
   // Tesela del vídeo (el vídeo real está pendiente: ver card.video.url).
   videoTile: {
-    title: "Conoce la zona de inversores",
+    title: "Quiénes somos y cómo trabajamos con inversores",
     label: "Ver vídeo",
   },
   card: {
@@ -378,7 +460,9 @@ export const footer = {
       title: "Navegación",
       links: [
         { label: "Propiedades", href: "#propiedades" },
+        { label: "Qué hacemos", href: "#que-hacemos" },
         { label: "Cómo invertimos", href: "#como-invertimos" },
+        { label: "Trabaja con nosotros", href: "#trabaja-con-nosotros" },
         { label: "Contacto", href: "#contacto" },
       ],
     },

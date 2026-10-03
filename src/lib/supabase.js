@@ -37,3 +37,20 @@ export async function saveLead({ name, email, message, interests }) {
 
   if (error) throw error;
 }
+
+/** Candidatura del formulario "Forma parte del equipo" (tabla applications). */
+export async function saveApplication(application) {
+  const client = await getClient();
+  if (!client) throw new Error("Supabase no está configurado");
+
+  const params = new URLSearchParams(window.location.search);
+  const { error } = await client.from("applications").insert({
+    ...application,
+    page_url: window.location.href,
+    utm_source: params.get("utm_source"),
+    utm_medium: params.get("utm_medium"),
+    utm_campaign: params.get("utm_campaign"),
+  });
+
+  if (error) throw error;
+}

@@ -15,7 +15,7 @@ export default function Nav() {
           />
         </a>
 
-        <nav className="hidden md:flex items-center gap-8 text-sm text-muted-dark">
+        <nav className="hidden lg:flex items-center gap-7 text-sm text-muted-dark">
           {nav.links.map((link) => (
             <a key={link.href} href={link.href} className="hover:text-white transition-colors">
               {link.label}
