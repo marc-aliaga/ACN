@@ -4,6 +4,7 @@ import Hero from "../components/Hero";
 import Properties from "../components/Properties";
 import HowItWorks from "../components/HowItWorks";
 import WhatWeDo from "../components/WhatWeDo";
+import Advantages from "../components/Advantages";
 import Careers from "../components/Careers";
 import InvestorZone from "../components/InvestorZone";
 import ContactCTA from "../components/ContactCTA";
@@ -24,6 +25,7 @@ export default function HomePage() {
         <PropertiesMap />
       </LazyOnView>
       <HowItWorks />
+      <Advantages />
       <InvestorZone />
       <ContactCTA />
       <WhatWeDo />

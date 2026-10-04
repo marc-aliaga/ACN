@@ -323,6 +323,24 @@ export const whatWeDo = {
   },
 };
 
+// Tabla comparativa para propietarios: nosotros vs. alquiler tradicional.
+// `traditional` es el texto corto de la columna del alquiler tradicional.
+export const advantages = {
+  kicker: "Ventajas exclusivas",
+  title: "¿Por qué elegirnos frente al alquiler tradicional?",
+  columns: { feature: "Ventaja", us: "Alquila con nosotros", traditional: "Alquiler tradicional" },
+  rows: [
+    { icon: "shield", title: "Alquiler seguro", text: "Todas las garantías y cuidados de tu inmueble. Cero preocupaciones.", traditional: "Riesgo de impagos" },
+    { icon: "settings", title: "Gestión integral", text: "Nos encargamos de todo, desde el mantenimiento hasta la gestión de inquilinos.", traditional: "Lo gestionas tú" },
+    { icon: "calendar", title: "Precio fijo mensual", text: "Recibirás el precio fijado mes a mes, sin falta, el día acordado.", traditional: "Depende del inquilino" },
+    { icon: "percent", title: "Sin comisiones", text: "No cobramos comisiones al propietario. El servicio es transparente.", traditional: "Comisión de agencia" },
+    { icon: "hammer", title: "Reforma incluida", text: "Asumimos el coste de la reforma para revalorizar tu vivienda.", traditional: "La pagas tú" },
+    { icon: "sofa", title: "Tranquilidad total", text: "No te molestaremos para nada, solo verás el ingreso en tu cuenta.", traditional: "Llamadas y gestiones" },
+    { icon: "trending", title: "Máxima rentabilidad", text: "Gracias a nuestras mejoras y modelo de gestión eficiente.", traditional: "Rentabilidad estándar" },
+    { icon: "wrench", title: "Solución de problemas", text: "Solucionaremos cualquier avería que surja en la vivienda rápidamente.", traditional: "Las averías son cosa tuya" },
+  ],
+};
+
 // Formulario "Forma parte del equipo". Los envíos se guardan en la tabla
 // `applications` de Supabase (ver supabase/applications.sql).
 export const careers = {
