@@ -447,7 +447,7 @@ export const contactSection = {
 
 export const cookieBanner = {
   title: "Cookies y analítica",
-  text: "Usamos cookies de analítica para entender cómo se usa la web y mejorarla. No se activan hasta que las aceptes.",
+  text: "Usamos cookies de analítica y de publicidad (Meta) para entender cómo se usa la web y medir nuestras campañas. No se activan hasta que las aceptes.",
   accept: "Aceptar",
   reject: "Rechazar",
   settings: "Configurar cookies",

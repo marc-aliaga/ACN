@@ -2,9 +2,10 @@ import { APPLY_URL, DOSSIER_URL } from "../data/content";
 
 const KEY = import.meta.env.VITE_POSTHOG_PROJECT;
 const HOST = import.meta.env.VITE_POSTHOG_HOST || "https://eu.i.posthog.com";
+const PIXEL_ID = "1122018260320219";
 const CONSENT_KEY = "acn-cookie-consent";
 
-export const analyticsEnabled = Boolean(KEY);
+export const analyticsEnabled = Boolean(KEY || PIXEL_ID);
 export const OPEN_COOKIE_SETTINGS = "acn:open-cookie-settings";
 
 export function getConsent() {
@@ -37,8 +38,40 @@ function load() {
   return loading;
 }
 
+// Meta Pixel: el snippet oficial de Meta, pero fbevents.js solo se descarga si el usuario
+// acepta las cookies (por eso no va en index.html).
+function pixel(...args) {
+  if (!window.fbq) {
+    const fbq = (window.fbq = function () {
+      if (fbq.callMethod) fbq.callMethod.apply(fbq, arguments);
+      else fbq.queue.push(arguments);
+    });
+    if (!window._fbq) window._fbq = fbq;
+    fbq.push = fbq;
+    fbq.loaded = true;
+    fbq.version = "2.0";
+    fbq.queue = [];
+    const script = document.createElement("script");
+    script.async = true;
+    script.src = "https://connect.facebook.net/en_US/fbevents.js";
+    document.head.appendChild(script);
+    fbq("init", PIXEL_ID);
+  }
+  window.fbq(...args);
+}
+
+function optOut() {
+  if (loading) loading.then((posthog) => posthog.opt_out_capturing());
+  if (window.fbq) window.fbq("consent", "revoke");
+}
+
 export function track(event, props) {
-  if (!analyticsEnabled || getConsent() !== "granted") return;
+  if (getConsent() !== "granted") return;
+  if (PIXEL_ID && event === "$pageview") {
+    pixel("consent", "grant");
+    pixel("track", "PageView");
+  }
+  if (!KEY) return;
   load().then((posthog) => {
     posthog.opt_in_capturing();
     posthog.capture(event, props);
@@ -52,12 +85,12 @@ export function grantConsent() {
 
 export function denyConsent() {
   storeConsent("denied");
-  if (loading) loading.then((posthog) => posthog.opt_out_capturing());
+  optOut();
 }
 
 export function resetConsent() {
   storeConsent(null);
-  if (loading) loading.then((posthog) => posthog.opt_out_capturing());
+  optOut();
 }
 
 function trackLinkClicks(e) {
