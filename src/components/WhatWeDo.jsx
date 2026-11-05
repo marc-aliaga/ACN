@@ -9,7 +9,7 @@ const PILLAR_ICONS = [Search, Hammer, Users, ShieldCheck];
 // "Qué hacemos": lo que hace el equipo en cada operación, junto a la foto del CEO.
 export default function WhatWeDo() {
   const { ceo } = whatWeDo;
-  // Si la foto aún no está subida (ver content.js), se muestran las iniciales.
+  // Si la foto no carga, se muestran las iniciales.
   const [photoFailed, setPhotoFailed] = useState(false);
 
   return (
@@ -39,6 +39,7 @@ export default function WhatWeDo() {
                     alt={`${ceo.name}, ${ceo.role}`}
                     loading="lazy"
                     onError={() => setPhotoFailed(true)}
+                    style={{ objectPosition: ceo.imagePosition }}
                     className="h-full w-full object-cover"
                   />
                 )}

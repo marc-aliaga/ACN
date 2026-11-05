@@ -299,9 +299,8 @@ export const howItWorks = {
   ],
 };
 
-// Sección "Qué hacemos" con la foto del CEO.
-// [PENDIENTE] foto real de Isaac Reyes: guardarla como public/team/isaac-reyes.webp
-// (vertical, ~800x1000). Mientras no exista se muestran sus iniciales.
+// Sección "Qué hacemos" con la foto del CEO (public/logo.jpg).
+// Si la imagen no carga, se muestran sus iniciales.
 export const whatWeDo = {
   kicker: "Qué hacemos",
   title: "Convertimos viviendas infrautilizadas en operaciones rentables",
@@ -316,7 +315,9 @@ export const whatWeDo = {
   ceo: {
     name: "Isaac Reyes",
     role: "CEO & Fundador",
-    image: "/team/isaac-reyes.webp",
+    image: "/logo.jpg",
+    // La persona está a la derecha de la foto: encuadra el recorte vertical sobre ella.
+    imagePosition: "93% center",
     initials: "IR",
     // [PENDIENTE] revisar este texto con Isaac antes de publicar.
     note: "Lidera la selección de cada operación y la relación con los inversores.",
